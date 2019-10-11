@@ -1,0 +1,10 @@
+import processing.core.PApplet;
+
+public class KaleidoscopePen {
+  public KaleidoscopePen(PApplet drawTo, int numberOfTrianglePens) {
+    
+  }
+  public void update(int mouseX, int mouseY, boolean mousePressed, char keyPressed) {
+    
+  }
+}

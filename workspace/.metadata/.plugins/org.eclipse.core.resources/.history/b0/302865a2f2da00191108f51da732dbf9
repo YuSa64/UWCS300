@@ -1,0 +1,11 @@
+import processing.core.PApplet;
+
+public class Point {
+  public void draw(PApplet drawTo) { // draw a white circle at this point’s position
+
+  }
+  public boolean isOver(int x, int y) { // returns true when the position x, y
+    // is within the circle drawn to visualize this point, otherwise returns false
+    return false;
+  }
+}

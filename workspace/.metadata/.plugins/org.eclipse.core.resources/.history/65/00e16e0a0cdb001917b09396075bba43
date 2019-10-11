@@ -1,0 +1,34 @@
+import processing.core.PApplet;
+
+public class Triangle {
+  private static final int[] COLORS = new int[] { // int packed w/8 bits of ARGB
+      // WHITE, RED, ORANGE, YELLOW, GREEN, BLUE, INDIGO, VIOLET
+      -1, -766643, -752563, -723891, -11668348, -11696908, -8106508, -766476};
+
+  private Point point1;
+  private Point point2;
+  private Point point3;
+  private int colIndex;
+
+  public Triangle(Point point1, Point point2, Point point3, int colIndex) {
+    this.point1 = point1;
+    this.point2 = point2;
+    this.point3 = point3;
+    this.colIndex = colIndex;
+  }
+
+  public void setColor(int colIndex) {
+    this.colIndex = colIndex;
+  }
+
+  public void draw(PApplet drawTo) { // draw a white circle at this point’s position
+    drawTo.triangle(point1.getX(), point1.getY(), point2.getX(), point2.getY(), point3.getX(),
+        point3.getY());
+    drawTo.fill(colIndex);
+  }
+
+  public boolean isOver(int x, int y) { // returns true when the position x, y
+    // is within the circle drawn to visualize this point, otherwise returns false
+    return false;
+  }
+}
