@@ -10,8 +10,14 @@
 //
 ///////////////////////////// CREDIT OUTSIDE HELP /////////////////////////////
 //
-// Persons: Sycomor, aronchick
-// Online Sources: https://stackoverflow.com/questions/26150507/find-the-number-of-week-rows-in-a-month
+// Students who get help from sources other than their partner must fully
+// acknowledge and credit those sources of help here. Instructors and TAs do
+// not need to be credited here, but tutors, friends, relatives, room mates,
+// strangers, and others do. If you received no outside help from either type
+// of source, then please explicitly indicate NONE.
+//
+// Persons: (identify each person and describe their help in detail)
+// Online Sources: (identify each URL and describe their assistance in detail)
 //
 /////////////////////////////// 80 COLUMNS WIDE ///////////////////////////////
 import java.util.Scanner;
@@ -192,14 +198,14 @@ public class CalendarPrinter {
       for (int j = 0; j < 7; j++) {
         if (day_count < days_in_month) {
           if (i == 1 && j < first_day_of_week)
-            Calendar[i][j] = " .  ";
+            Calendar[i][j] = "  . ";
           else {
             Calendar[i][j] = " " + (++day_count) + " ";
             if (Calendar[i][j].length() == 3)
               Calendar[i][j] += " ";
           }
         } else
-          Calendar[i][j] = " .  ";
+          Calendar[i][j] = "  . ";
       }
     }
     return Calendar;

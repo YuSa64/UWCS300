@@ -133,19 +133,19 @@ public class CalendarTester {
     String[][] print3 = CalendarPrinter.generateCalendar("sep", "1998");
     for (int i = 0; i < print1.length; i++) {
       for (int j = 0; j < print1[i].length; j++) {
-        System.out.print(print1[i][j]);
+        System.out.print(print1[i][j] + "\t");
       }
       System.out.println();
     }
     for (int i = 0; i < print2.length; i++) {
       for (int j = 0; j < print2[i].length; j++) {
-        System.out.print(print2[i][j]);
+        System.out.print(print2[i][j] + "\t");
       }
       System.out.println();
     }
     for (int i = 0; i < print3.length; i++) {
       for (int j = 0; j < print3[i].length; j++) {
-        System.out.print(print3[i][j]);
+        System.out.print(print3[i][j] + "\t");
       }
       System.out.println();
     }
