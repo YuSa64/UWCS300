@@ -53,7 +53,7 @@ public class BankTeller {
     try {
       int type = Integer.parseInt(tran[0]);
       int amount = Integer.parseInt(tran[1]);
-      if (tran.length != 2 || type != 0 || type != 1)
+      if (tran.length != 2 && type != 0 && type != 1)
         throw new DataFormatException("Transaction format is not correct!");
       if (type == 0)
         account.withdraw(amount);
