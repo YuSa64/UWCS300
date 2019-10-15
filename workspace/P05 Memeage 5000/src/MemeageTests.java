@@ -98,10 +98,11 @@ public class MemeageTests {
       test = new Memeage(image1, meme);
       if (!test.getMeme().equals(meme))
         return false;
+      
+      test.saveAs(new File("testdone.png"));
       return true;
     } catch (IOException | IllegalArgumentException e) {
       return false;
     }
-
   }
 }
