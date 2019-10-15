@@ -34,7 +34,7 @@ public class ColorPlusChar extends Color {
   public void hideChar(char character) {
     String charNum = Integer.toBinaryString((int) character);
     if (charNum.length() != 8) {
-      for (int i = 0; i < 8 - charNum.length(); i++)
+      for (int i = charNum.length(); i < 8; i++)
         charNum = "0" + charNum;
     }
     super.setBits(2, 24, Integer.parseInt(charNum.substring(0, 2)));

@@ -38,11 +38,11 @@ public class Memeage extends Image {
     if (super.getHeight() * super.getWidth() < length)
       throw new IllegalArgumentException();
     loop: for (int i = 0; i < super.getHeight(); i++) {
-      for (int j = 0; j < super.getWidth(); i++) {
-        int num = 3 * i + j;
-        if ((int) meme.charAt(num) > 127)
-          throw new IllegalArgumentException();
+      for (int j = 0; j < super.getWidth(); j++) {
+        int num = super.getWidth() * i + j;
         if (num != length) {
+          if ((int) meme.charAt(num) > 127)
+            throw new IllegalArgumentException();
           ColorPlusChar temp = new ColorPlusChar(super.getColor(j, i), meme.charAt(num));
           super.setColor(j, i, temp);
         } else {
@@ -57,13 +57,15 @@ public class Memeage extends Image {
   public String getMeme() throws IllegalStateException {
     String output = "";
     boolean isNull = false;
-    for (int i = 0; i < super.getHeight(); i++) {
-      for (int j = 0; j < super.getWidth(); i++) {
-        char get = super.getColor(j, i).getChar();
+    loop: for (int i = 0; i < super.getHeight(); i++) {
+      for (int j = 0; j < super.getWidth(); j++) {
+        char get = new ColorPlusChar(super.getColor(j, i)).revealChar();
         if ((int) get > 127)
           throw new IllegalStateException();
-        if (get == '\0')
+        if (get == '\0') {
           isNull = true;
+          break loop;
+        }
         output += get;
       }
     }
