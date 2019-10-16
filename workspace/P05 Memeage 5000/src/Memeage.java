@@ -24,15 +24,37 @@ import java.io.File;
 import java.io.IOException;
 
 public class Memeage extends Image {
+  /**
+   * Loads an image from the specified file, and stores its contents as Color objects.
+   * 
+   * @param imageFile is the image file to be loaded
+   * @throws IOException is thrown when there is trouble reading data from the specified file
+   */
   public Memeage(File file) throws IOException {
     super(file);
   }
 
+  /**
+   * Loads an image from the specified file, and stores its contents as Color objects. Then stores
+   * String in Color objects
+   * 
+   * @param imageFile is the image file to be loaded
+   * @param meme      is the string to be stored
+   * @throws IOException              is thrown when there is trouble reading data from the
+   *                                  specified file
+   * @throws IllegalArgumentException is thrown when there is trouble with String
+   */
   public Memeage(File file, String meme) throws IOException, IllegalArgumentException {
     super(file);
     setMeme(meme);
   }
 
+  /**
+   * Stores a String by hiding each characters of String into value of each Color objects.
+   * 
+   * @param meme is the string to be stored
+   * @throws IllegalArgumentException is thrown when there is trouble with String
+   */
   public void setMeme(String meme) throws IllegalArgumentException {
     int length = meme.length();
     if (super.getHeight() * super.getWidth() < length)
@@ -54,6 +76,13 @@ public class Memeage extends Image {
     }
   }
 
+  /**
+   * Retrieves String hidden in image
+   * 
+   * @return String hidden in this Memeage object
+   * @throws IllegalStateException is thrown when there is trouble with retrieving characters from
+   *                               Color objects
+   */
   public String getMeme() throws IllegalStateException {
     String output = "";
     boolean isNull = false;

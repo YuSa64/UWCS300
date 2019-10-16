@@ -21,16 +21,30 @@
 //
 /////////////////////////////// 80 COLUMNS WIDE ///////////////////////////////
 public class ColorPlusChar extends Color {
+  /**
+   * Create a new ColorPlusChar object with the specific initial value
+   * 
+   * @param argb contains initial four bytes (32 bits) of data
+   */
   public ColorPlusChar(Color color, char character) {
     super(color);
     hideChar(character);
   }
 
+  /**
+   * Create a new Color object with the specific initial value
+   * 
+   * @param other contains four bytes (32 bits) of data as a value
+   */
   public ColorPlusChar(Color color) {
     super(color);
   }
 
-  // stores 8-bit character within the least significant bits of color components
+  /**
+   * Stores 8-bit character within the least significant bits of color components
+   * 
+   * @param character to hide in this ColorPlusChar object
+   */
   public void hideChar(char character) {
     String charNum = Integer.toBinaryString((int) character);
     if (charNum.length() != 8) {
@@ -43,7 +57,11 @@ public class ColorPlusChar extends Color {
     super.setBits(2, 0, Integer.parseInt(charNum.substring(6)));
   }
 
-  // retrieves 8-bit character from the least significant bits of color components
+  /**
+   * Retrieves 8-bit character from the least significant bits of color components
+   * 
+   * @return character hidden in this ColorPlusChar object
+   */
   public char revealChar() {
     String charNum = "";
     for (int i = 0; i < 4; i++) {

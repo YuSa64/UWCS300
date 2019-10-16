@@ -85,7 +85,7 @@ public class MemeageTests {
     ColorPlusChar test2 = new ColorPlusChar(test1, c);
     if (test2.getARGB() != -40973794)
       return false;
-    if (test2.revealChar() != 'j')
+    if (test2.revealChar() != c)
       return false;
     return true;
   }
@@ -99,7 +99,7 @@ public class MemeageTests {
       if (!test.getMeme().equals(meme))
         return false;
       
-      test.saveAs(new File("testdone.png"));
+      test.saveAs(new File("testdone.png")); // just test to how it works
       return true;
     } catch (IOException | IllegalArgumentException e) {
       return false;
