@@ -17,6 +17,6 @@ public class MegaBlockBuilderTester {
     return test.toString().equals("BLUE B");
   }
   public static boolean testLinkedMegaBlock() {
-    return false
+    return false;
   }
 }
