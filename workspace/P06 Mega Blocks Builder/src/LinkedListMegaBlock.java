@@ -13,21 +13,23 @@ public class LinkedListMegaBlock {
   }
 
   public void addBlue(MegaBlock blueBlock) {
-    if(blueBlock == null || blueBlock.getColor() != Color.BLUE)
+    if (blueBlock == null || blueBlock.getColor() != Color.BLUE)
       throw new IllegalArgumentException();
-    if(head == null || tail == null) {
+    if (head == null || tail == null) {
       head = new LinkedMegaBlock(blueBlock);
       tail = head;
     } else {
       tail.setNext(new LinkedMegaBlock(blueBlock));
       tail = tail.getNext();
     }
+    blueCount++;
+    size++;
   }
 
   public void addRed(MegaBlock redBlock) {
-    if(redBlock == null || redBlock.getColor() != Color.RED)
+    if (redBlock == null || redBlock.getColor() != Color.RED)
       throw new IllegalArgumentException();
-    if(head == null || tail == null) {
+    if (head == null || tail == null) {
       head = new LinkedMegaBlock(redBlock);
       tail = head;
     } else {
@@ -35,24 +37,37 @@ public class LinkedListMegaBlock {
       head = new LinkedMegaBlock(redBlock);
       head.setNext(current);
     }
+    redCount++;
+    size++;
   }
 
   public void addYellow(int index, MegaBlock yellowBlock) {
-    if(yellowBlock == null || yellowBlock.getColor() != Color.YELLOW)
+    if (yellowBlock == null || yellowBlock.getColor() != Color.YELLOW)
       throw new IllegalArgumentException();
-    if(head == null || tail == null) {
+    if (head == null || tail == null) {
       head = new LinkedMegaBlock(yellowBlock);
       tail = head;
     } else {
-      if(index < redCount || index > size- blueCount)
+      if (index < redCount || index > size - blueCount)
         throw new IndexOutOfBoundsException();
-      LinkedMegaBlock current = head, add = new LinkedMegaBlock(yellowBlock);
-      for(int i = 0; i < index-1; i++) {
-        current = current.getNext();
+      LinkedMegaBlock currentp = head, currentb = head, add = new LinkedMegaBlock(yellowBlock);
+      for (int i = 0; i < index; i++) {
+        currentb = currentp;
+        currentp = currentp.getNext();
       }
-      add.setNext(current.getNext().getNext());
-      current.setNext(add);
+      if (currentp == null) {
+        currentb.setNext(add);
+        tail = add;
+      } else if (currentp.equals(currentb)) {
+        add.setNext(currentb);
+        head = add;
+      } else {
+        currentb.setNext(add);
+        add.setNext(currentp);
+      }
     }
+    yellowCount++;
+    size++;
   }
 
   public void clear() {
@@ -65,7 +80,7 @@ public class LinkedListMegaBlock {
   }
 
   public MegaBlock get(int index) {
-    if(index < 0 || index >= size)
+    if (index < 0 || index >= size)
       throw new IndexOutOfBoundsException();
     LinkedMegaBlock links = head;
     for (int i = 0; i < index; i++) {
@@ -91,7 +106,7 @@ public class LinkedListMegaBlock {
   }
 
   public MegaBlock removeBlue() {
-    if(redCount == 0) 
+    if (redCount == 0)
       throw new NoSuchElementException();
     LinkedMegaBlock output = tail, current = head;
     while (current.getNext().getNext() != null) {
@@ -100,32 +115,37 @@ public class LinkedListMegaBlock {
     tail = current;
     tail.setNext(null);
     blueCount--;
+    size--;
     return output.getBlock();
   }
 
   public MegaBlock removeRed() {
-    if(redCount == 0) 
+    if (redCount == 0)
       throw new NoSuchElementException();
     LinkedMegaBlock current = head;
     head = head.getNext();
     redCount--;
+    size--;
     return current.getBlock();
   }
 
   public MegaBlock removeYellow(int index) {
-    if(index < redCount || index > size- blueCount)
+    if (index < redCount || index > size - blueCount)
       throw new IndexOutOfBoundsException();
-    LinkedMegaBlock current = head, output;
-    for (int i = 0; i < redCount - 1; i++) {
-      current = current.getNext();
+    LinkedMegaBlock currentp = head, currentb = head, output = null;
+    for (int i = 0; i < index; i++) {
+      currentb = currentp;
+      currentp = currentp.getNext();
     }
-    output = current.getNext();
-    current.setNext(current.getNext().getNext());
+    output = currentp;
+    currentb.setNext(currentp.getNext());
+    yellowCount--;
+    size--;
     return output.getBlock();
   }
 
   public MegaBlock set(int index, MegaBlock block) {
-    if(index < 0 || index >= size)
+    if (index < 0 || index >= size)
       throw new IndexOutOfBoundsException();
     LinkedMegaBlock current = head, output = null;
     for (int i = 0; i < index; i++) {
@@ -146,9 +166,11 @@ public class LinkedListMegaBlock {
   public String toString() {
     String output = "";
     LinkedMegaBlock current = head;
-    while (current.getNext() != null) {
-      output += current.toString();
-    }
+    if (current != null)
+      do {
+        output += current.toString();
+        current = current.getNext();
+      } while (current != null);
     return output;
   }
 }
