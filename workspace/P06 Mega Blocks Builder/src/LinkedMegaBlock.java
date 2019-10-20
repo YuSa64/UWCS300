@@ -1,4 +1,25 @@
-
+//////////////////// ALL ASSIGNMENTS INCLUDE THIS SECTION /////////////////////
+//
+// Title: Mega Blocks Builder
+// Files: LinkedMegaBlock.java, LinkedListMegaBlock.java, MegaBlockBuilderTester.java
+// Course: CS300 Fall 2019
+//
+// Author: Hyeon Jun Jeong
+// Email: hjeong44@wisc.edu
+// Lecturer's Name: Mouna Ayari Ben Hadj Kacem
+//
+///////////////////////////// CREDIT OUTSIDE HELP /////////////////////////////
+//
+// Students who get help from sources other than their partner must fully
+// acknowledge and credit those sources of help here. Instructors and TAs do
+// not need to be credited here, but tutors, friends, relatives, room mates,
+// strangers, and others do. If you received no outside help from either type
+// of source, then please explicitly indicate NONE.
+//
+// Persons: (identify each person and describe their help in detail)
+// Online Sources: (identify each URL and describe their assistance in detail)
+//
+/////////////////////////////// 80 COLUMNS WIDE ///////////////////////////////
 public class LinkedMegaBlock {
 
   private MegaBlock block; // data field of this linkedMegaBlock
@@ -59,8 +80,8 @@ public class LinkedMegaBlock {
 
   /**
    * Returns a String representation of this Linked MegaBlock object. This String will be :
-   * block.toString() + " -> " // if next field is not null
-   * block.toString() + " -> END" // if next field is null
+   * block.toString() + " -> " // if next field is not null block.toString() + " -> END" // if next
+   * field is null
    */
   public String toString() {
     if (next != null)
