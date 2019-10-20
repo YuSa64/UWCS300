@@ -264,7 +264,7 @@ public class LinkedListMegaBlock {
     for (int i = 0; i < index; i++) {
       current = current.getNext();
     }
-    if (block == null || get(index).getColor() != block.getColor())
+    if (block == null || get(index).equals(block))
       throw new IllegalArgumentException();
     else
       output = current;

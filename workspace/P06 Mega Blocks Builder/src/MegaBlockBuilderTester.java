@@ -36,7 +36,7 @@ public class MegaBlockBuilderTester {
 
   public static boolean testMegaBlockEquals() {
     MegaBlock a = new MegaBlock(Color.RED, 't');
-    MegaBlock b = new MegaBlock(Color.RED, 't');
+    MegaBlock b = new MegaBlock(Color.RED, 'T');
     MegaBlock c = new MegaBlock(Color.YELLOW, 'T');
     return a.equals(b) && !a.equals(c);
   }
