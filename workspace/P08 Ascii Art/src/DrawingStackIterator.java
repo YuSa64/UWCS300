@@ -25,7 +25,7 @@ import java.util.Iterator;
 
 public class DrawingStackIterator implements Iterator<DrawingChange> {
 
-  private LinkedNode<DrawingChange> node;
+  private LinkedNode<DrawingChange> node; //current node of Iterator
 
   public DrawingStackIterator(LinkedNode<DrawingChange> node) {
     this.node = node;
@@ -39,7 +39,7 @@ public class DrawingStackIterator implements Iterator<DrawingChange> {
    */
   public boolean hasNext() {
     // TODO Auto-generated method stub
-    return node != null;
+    return node != null; //if current node is null, the node does not have next.
   }
 
   @Override
@@ -50,11 +50,11 @@ public class DrawingStackIterator implements Iterator<DrawingChange> {
    */
   public DrawingChange next() {
     // TODO Auto-generated method stub
-    DrawingChange output;
-    if (!hasNext())
-      throw new java.util.NoSuchElementException();
+    DrawingChange output; //DrawingChange instance to be returned
+    if (!hasNext()) //if current node is null
+      throw new java.util.NoSuchElementException(); //throw exception
     output = node.getData();
-    node = node.getNext();
+    node = node.getNext(); //move to the next node
     return output;
   }
 

@@ -25,8 +25,8 @@ import java.util.Iterator;
 
 public class DrawingStack implements StackADT<DrawingChange>, java.lang.Iterable<DrawingChange> {
 
-  private LinkedNode<DrawingChange> top;
-  private int size = 0;
+  private LinkedNode<DrawingChange> top; // top of the stack
+  private int size = 0; // size of the stack (initially 0)
 
   @Override
   /**
@@ -36,7 +36,7 @@ public class DrawingStack implements StackADT<DrawingChange>, java.lang.Iterable
    */
   public Iterator<DrawingChange> iterator() {
     // TODO Auto-generated method stub
-    return new DrawingStackIterator(top);
+    return new DrawingStackIterator(top); // returns Iterator of the stack
   }
 
   @Override
@@ -45,16 +45,17 @@ public class DrawingStack implements StackADT<DrawingChange>, java.lang.Iterable
    * 
    * @param element an element to be added
    * @throws java.util.IllegalArgumentException with a descriptive error message if the input
-   *         element is null
+   *                                            element is null
    */
   public void push(DrawingChange element) {
     // TODO Auto-generated method stub
-    if (element == null)
-      throw new IllegalArgumentException("Elemnet is null!");
+    if (element == null) // if argument is null
+      throw new IllegalArgumentException("Elemnet is null!"); // throw descriptive exception
     LinkedNode<DrawingChange> temp = new LinkedNode<DrawingChange>((DrawingChange) element);
-    temp.setNext(top);
-    top = temp;
-    size++;
+    // new node whose data is argument
+    temp.setNext(top);// set the current top as a next node
+    top = temp; // change the top node
+    size++;// increase size
   }
 
   @Override
@@ -66,11 +67,12 @@ public class DrawingStack implements StackADT<DrawingChange>, java.lang.Iterable
    */
   public DrawingChange pop() {
     // TODO Auto-generated method stub
-    if(isEmpty()) throw new java.util.EmptyStackException();
-    DrawingChange output = top.getData();
-    top = top.getNext();
-    size--;
-    return output;
+    if (isEmpty()) // if stack is empty
+      throw new java.util.EmptyStackException(); // throw exception
+    DrawingChange output = top.getData(); // output to be returned
+    top = top.getNext(); // change top (remove current top)
+    size--; // decrease size
+    return output; // return DrawingChange
   }
 
   @Override
@@ -82,8 +84,9 @@ public class DrawingStack implements StackADT<DrawingChange>, java.lang.Iterable
    */
   public DrawingChange peek() {
     // TODO Auto-generated method stub
-    if(isEmpty()) throw new java.util.EmptyStackException();
-    return top.getData();
+    if (isEmpty()) // if stack is empty
+      throw new java.util.EmptyStackException();// throw exception
+    return top.getData(); // return DrawingChange
   }
 
   @Override
@@ -94,7 +97,7 @@ public class DrawingStack implements StackADT<DrawingChange>, java.lang.Iterable
    */
   public boolean isEmpty() {
     // TODO Auto-generated method stub
-    return top == null;
+    return top == null; // it is empty when top node does not exist/
   }
 
   @Override
@@ -105,7 +108,7 @@ public class DrawingStack implements StackADT<DrawingChange>, java.lang.Iterable
    */
   public int size() {
     // TODO Auto-generated method stub
-    return size;
+    return size; // return current size
   }
 
 

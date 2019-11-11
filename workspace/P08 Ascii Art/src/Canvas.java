@@ -41,13 +41,14 @@ public class Canvas {
    * @throws IllegalArgumentException - if width or height is 0 or negative.
    */
   public Canvas(int width, int height) {
-    if (width <= 0 || height <= 0)
-      throw new IllegalArgumentException("width or height cannot be 0 or negative!");
-    this.width = width;
-    this.height = height;
-    drawingArray = new char[this.height][this.width];
-    undoStack = new DrawingStack();
-    redoStack = new DrawingStack();
+    if (width <= 0 || height <= 0) // if input is less or equal than 0 (impossible canvas)
+      throw new IllegalArgumentException("width or height cannot be 0 or negative!"); // throw
+                                                                                      // exception
+    this.width = width; // initialize width
+    this.height = height; // initialize height
+    drawingArray = new char[this.height][this.width]; // create new canvas shaped grid
+    undoStack = new DrawingStack(); // initialize undoStack
+    redoStack = new DrawingStack(); // initialize redoStack
   }
 
   /**
@@ -66,9 +67,10 @@ public class Canvas {
     // you should clear the redoStack if it is not already empty).
     if (row < 0 || row > this.width || col < 0 || col > this.height)
       throw new IllegalArgumentException("You cannot draw outside the canvas!");
-    char temp = drawingArray[row][col];
-    drawingArray[row][col] = c;
-    undoStack.push(new DrawingChange(row, col, temp, c));
+    // if input location is out of canvas, throw descriptive exception
+    char temp = drawingArray[row][col]; // current char at the location
+    drawingArray[row][col] = c; // change char at the location
+    undoStack.push(new DrawingChange(row, col, temp, c)); // push current change as a DrawingChange
   }
 
   /**
@@ -81,15 +83,15 @@ public class Canvas {
     // An undone DrawingChange should be added to the redoStack so that
     // we can redo if needed.
     // The content of the drawingArray should be updated accordingly to this change.
-    if (!undoStack.isEmpty()) {
-      DrawingChange temp = undoStack.peek();
+    if (!undoStack.isEmpty()) { // if undoStack is not empty
+      DrawingChange temp = undoStack.peek(); // latest DrawingChange
       if (drawingArray[temp.row][temp.col] != temp.newChar)
-        return false;
-      drawingArray[temp.row][temp.col] = temp.prevChar;
-      redoStack.push(undoStack.pop());
-      return true;
+        return false; // if current canvas is not equal to DrawingChange, return false
+      drawingArray[temp.row][temp.col] = temp.prevChar; // change to the previous char
+      redoStack.push(undoStack.pop()); // push poped DrawingChange from undoStack to redoStack
+      return true; // undo success
     } else
-      return false;
+      return false; // fail because undoStack is empty
   }
 
   /**
@@ -102,15 +104,15 @@ public class Canvas {
     // A redone DrawingChange should be added (back) to the undoStack so that
     // we can undo again if needed.
     // The content of the drawingArray should be updated accordingly to this change.
-    if (!redoStack.isEmpty()) {
-      DrawingChange temp = redoStack.peek();
+    if (!redoStack.isEmpty()) { // if redoStack is not empty
+      DrawingChange temp = redoStack.peek(); // latest DrawingChange
       if (drawingArray[temp.row][temp.col] != temp.prevChar)
-        return false;
-      drawingArray[temp.row][temp.col] = temp.newChar;
-      undoStack.push(redoStack.pop());
-      return true;
+        return false; // if current canvas is not equal to DrawingChange, return false
+      drawingArray[temp.row][temp.col] = temp.newChar; // change to the new char
+      undoStack.push(redoStack.pop()); // push poped DrawingChange from redoStack to undoStack
+      return true; // redo success
     } else
-      return false;
+      return false; // fail because redoStack is empty
   }
 
   // Return a printable string version of the Canvas.
@@ -119,37 +121,43 @@ public class Canvas {
      * Format example: [_ is blank. Use System.lineSeparator() to put a newline character between
      * rows] X___X _X_X_ __X__ _X_X_ X___X
      */
-    String output = "";
-    for (char[] a : drawingArray) {
-      for (char c : a) {
-        if (c == '\0')
-          output += "_";
+    String output = ""; // output string to be returned
+    for (char[] r : drawingArray) { // for each row
+      for (char c : r) { // for each column
+        if (c == '\0') // if char is empty
+          output += "_"; // add _ instead
         else
-          output += c;
+          output += c; // else add char
       }
-      output += System.lineSeparator();
+      output += System.lineSeparator(); // add new line
     }
-    return output;
+    return output; // return output
   }
 
   public void printDrawing() {
-    System.out.println(this);
+    System.out.println(this); // print String form of the instance
   }
 
   public void printHistory() {
-    Iterator<DrawingChange> itr = undoStack.iterator();
-    DrawingChange data;
+    Iterator<DrawingChange> itr = undoStack.iterator(); // iterator of the undoStack
+    DrawingChange data; // data of current iterator
     for (int i = 0; i < undoStack.size(); i++) {
-      data = itr.next();
+      data = itr.next(); // get data of current node
       System.out.print((undoStack.size() - i) + ". draw \'" + data.newChar + "\' on (" + data.row
           + ", " + data.col + ")" + System.lineSeparator());
+      // print as a form below, from the latest to first
+      // ex)
+      // 3. draw 's' on (0,0)
+      // 2. draw 't' on (3,2)
+      // 1. draw 'c' on (2,3)
     }
   }
 
-// Getter Methods
-  
+  // Getter Methods
+
   /**
    * Returns width
+   * 
    * @return width of the Canvas
    */
   public int getWidth() {
@@ -158,6 +166,7 @@ public class Canvas {
 
   /**
    * Returns height
+   * 
    * @return height of the Canvas
    */
   public int getHeight() {
@@ -166,6 +175,7 @@ public class Canvas {
 
   /**
    * Returns drawing array
+   * 
    * @return drawing array of the canvas
    */
   public char[][] getDrawingArray() {
@@ -174,6 +184,7 @@ public class Canvas {
 
   /**
    * Returns undoStack
+   * 
    * @return undoStack of the canvas
    */
   public DrawingStack getUndoStack() {
@@ -182,6 +193,7 @@ public class Canvas {
 
   /**
    * Returns redoStack
+   * 
    * @return redoStack of the canvas
    */
   public DrawingStack getRedoStack() {
