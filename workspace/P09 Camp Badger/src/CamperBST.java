@@ -96,18 +96,21 @@ public class CamperBST {
    */
   private CampTreeNode deleteHelp(CampTreeNode current, Camper key) {
     /* YOUR RECURSIVE IMPLEMENTATION OF DELETE HERE */
-    
-    Iterator<Camper> itr = traverse("INORDER");
-    boolean isIntree = false;
-    while(itr.hasNext()) {
-      if(itr.next().compareTo(key) == 0)
-        isIntree = true;
-    }
-    if(!isIntree)
-      throw new NoSuchElementException();
-    
+
     if (current == null) {
       return current;
+    }
+
+
+    if (current.equals(root)) {
+      Iterator<Camper> itr = traverse("INORDER");
+      boolean isIntree = false;
+      while (itr.hasNext()) {
+        if (itr.next().compareTo(key) == 0)
+          isIntree = true;
+      }
+      if (!isIntree)
+        throw new NoSuchElementException();
     }
 
     if (current.getData().compareTo(key) < 0) {
@@ -115,24 +118,18 @@ public class CamperBST {
     } else if (current.getData().compareTo(key) > 0) {
       current.setLeftNode(deleteHelp(current.getLeftNode(), key));
     } else {
-      if (current.getRightNode() == null) {
-        size--;
+      size--;
+      if (current.getRightNode() == null)
         return current.getLeftNode();
-      }
-      else if (current.getLeftNode() == null) {
-        size--;        
+      else if (current.getLeftNode() == null)
         return current.getRightNode();
-      }
 
-
-      CampTreeNode temp = current;
-      while (current.getLeftNode() != null)
-        temp = current.getLeftNode();
+      CampTreeNode temp = current.getRightNode();
+      while (temp.getLeftNode() != null)
+        temp = temp.getLeftNode();
 
       current.setData(temp.getData());
       current.setRightNode(deleteHelp(current.getRightNode(), key));
-
-      size--;
     }
 
     return current;
