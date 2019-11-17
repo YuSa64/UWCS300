@@ -1,4 +1,5 @@
 
+
 public class CampManager {
 
   private CamperBST campers;
@@ -10,28 +11,24 @@ public class CampManager {
   }
 
   public void enrollCamper(Camper newCamper) {
-    if (campers.isEmpty()) {
-      campers.root = new CampTreeNode();
-      campers.root.setData(newCamper);
-    } else {
-      int comparison = campers.root.getData().compareTo(newCamper);
-      if (comparison < 0) {
-        
-      } else if (comparison > 1) {
-
-      }
-    }
+    if (newCamper.getAge() >= 8 && newCamper.getAge() <= 9)
+      newCamper.assignCabin(CABIN_NAMES[0]);
+    else if (newCamper.getAge() >= 10 && newCamper.getAge() <= 12)
+      newCamper.assignCabin(CABIN_NAMES[1]);
+    else if (newCamper.getAge() >= 13 && newCamper.getAge() <= 14)
+      newCamper.assignCabin(CABIN_NAMES[2]);
+    campers.insert(newCamper);
   }
 
   public void printStatistics() {
-
+    System.out.println("Number of Campers: " + campers.size());
   }
 
   public java.util.Iterator<Camper> traverse(String order) {
-    return null;
+    return campers.traverse(order);
   }
 
   public void unenrollCamper(Camper delCamper) throws java.util.NoSuchElementException {
-
+    campers.delete(delCamper);
   }
 }

@@ -34,3 +34,4 @@ org.eclipse.jdt.core.formatter.put_empty_statement_on_new_line=false
 org.eclipse.jdt.core.formatter.tabulation.char=space
 org.eclipse.jdt.core.formatter.tabulation.size=2
 org.eclipse.jdt.core.formatter.use_on_off_tags=true
+org.eclipse.jdt.core.timeoutForParameterNameFromAttachedJavadoc=50
