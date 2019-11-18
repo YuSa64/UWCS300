@@ -1,3 +1,14 @@
+//////////////////// ALL ASSIGNMENTS INCLUDE THIS SECTION /////////////////////
+//
+// Title: Camp Badger
+// Files: CampEnrollmentApp.java, Camper.java, CamperBST.java, CampManager.java, CampTreeNode.java
+// Course: CS300 Fall 2019
+//
+// Author: Hyeon Jun Jeong
+// Email: hjeong44@wisc.edu
+// Lecturer's Name: Mouna Ayari Ben Hadj Kacem
+//
+/////////////////////////////// 80 COLUMNS WIDE ///////////////////////////////
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.NoSuchElementException;
@@ -10,6 +21,9 @@ public class CamperBST {
   private LinkedList<Camper> traversedLList;
 
 
+  /**
+   * Constructor of CamperBST instance
+   */
   public CamperBST() {
     root = null;
     size = 0;
@@ -60,12 +74,20 @@ public class CamperBST {
     return current;
   }
 
-  // Prints the contents of this tree in alphabetical order
-  // based on the string "lastName, firstName"
+  /**
+   * Prints the contents of this tree in alphabetical order based on the string "lastName,
+   * firstName"
+   */
   public void print() {
     printHelp(root);
   }
 
+  /**
+   * Recursive helper method to print
+   * 
+   * @param current, The "root" of the subtree we are inserting into, ie the node we are currently
+   *                 at.
+   */
   private void printHelp(CampTreeNode current) {
     if (current == null) {
       return;
@@ -101,7 +123,7 @@ public class CamperBST {
       return current;
     }
 
-
+    // initial check if camper is in the tree. Happens only if subroot is the main root.
     if (current.equals(root)) {
       Iterator<Camper> itr = traverse("INORDER");
       boolean isIntree = false;
@@ -113,21 +135,29 @@ public class CamperBST {
         throw new NoSuchElementException();
     }
 
+    // if key is larger than the current node
     if (current.getData().compareTo(key) < 0) {
       current.setRightNode(deleteHelp(current.getRightNode(), key));
-    } else if (current.getData().compareTo(key) > 0) {
+    }
+    // if key is smaller than the current node
+    else if (current.getData().compareTo(key) > 0) {
       current.setLeftNode(deleteHelp(current.getLeftNode(), key));
-    } else {
+    }
+    // if key is equal to the current node
+    else {
       size--;
+      
+      //if there's only one or no child
       if (current.getRightNode() == null)
-        return current.getLeftNode();
+        return current.getLeftNode(); //remove current node and return the left node
       else if (current.getLeftNode() == null)
-        return current.getRightNode();
+        return current.getRightNode(); //remove current node and return the right node
 
+      //if there's two child
       CampTreeNode temp = current.getRightNode();
       while (temp.getLeftNode() != null)
-        temp = temp.getLeftNode();
-
+        temp = temp.getLeftNode(); //get the smallest node from right subroot
+      //remove current data and set new data
       current.setData(temp.getData());
       current.setRightNode(deleteHelp(current.getRightNode(), key));
     }
@@ -135,7 +165,11 @@ public class CamperBST {
     return current;
   }
 
-  // returns an iterator of camper in the correct order as designated
+  /**
+   * returns an iterator of camper in the correct order as designated
+   * @param order,   the type of traversal to perform
+   * @return an Iterator with ordered traversal
+   */
   public Iterator<Camper> traverse(String order) {
     // first time traversing need to initialize LinkedList
     if (traversedLList == null) {

@@ -1,3 +1,14 @@
+//////////////////// ALL ASSIGNMENTS INCLUDE THIS SECTION /////////////////////
+//
+// Title: Camp Badger
+// Files: CampEnrollmentApp.java, Camper.java, CamperBST.java, CampManager.java, CampTreeNode.java
+// Course: CS300 Fall 2019
+//
+// Author: Hyeon Jun Jeong
+// Email: hjeong44@wisc.edu
+// Lecturer's Name: Mouna Ayari Ben Hadj Kacem
+//
+/////////////////////////////// 80 COLUMNS WIDE ///////////////////////////////
 /**
  * Class to represent the nodes of the binary search tree.
  * 
