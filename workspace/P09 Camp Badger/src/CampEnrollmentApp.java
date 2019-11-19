@@ -28,10 +28,20 @@ public class CampEnrollmentApp {
           Statistics(manager);
           break;
         case 'E':
-          Enroll(manager, new Camper(temp[2], temp[1], Integer.parseInt(temp[3])));
+          try {
+            Enroll(manager, new Camper(temp[2], temp[1], Integer.parseInt(temp[3])));
+            System.out.println("Enrollment of " + temp[2] + " " + temp[1] + " Successful!");
+          } catch (Exception e) {
+            System.out.println(e.getMessage());
+          }
           break;
         case 'R':
-          Unenroll(manager, new Camper(temp[2], temp[1], 11));
+          try {
+            Unenroll(manager, new Camper(temp[2], temp[1], 11));
+            System.out.println("Unenrollment of " + temp[2] + " " + temp[1] + " Successful!");
+          } catch (Exception e) {
+            System.out.println("That camper is not enrolled.");
+          }
           break;
         case 'T':
           Traverse(manager, temp[1]);
@@ -49,13 +59,7 @@ public class CampEnrollmentApp {
    * @param camper  - a Camper to be enrolled
    */
   public static void Enroll(CampManager manager, Camper camper) {
-    try {
-      manager.enrollCamper(camper);
-      System.out.println(
-          "Enrollment of " + camper.getFirstName() + " " + camper.getLastName() + " Successful!");
-    } catch (Exception e) {
-      System.out.println(e.getMessage());
-    }
+    manager.enrollCamper(camper);
   }
 
   /**
@@ -71,22 +75,19 @@ public class CampEnrollmentApp {
 
   /**
    * Unenroll the camper from the campmanager
+   * 
    * @param manager - a CampManager to unenroll the camper
-   * @param camper - a Camper to be unenrolled 
+   * @param camper  - a Camper to be unenrolled
    */
   public static void Unenroll(CampManager manager, Camper camper) {
-    try {
-      manager.unenrollCamper(camper);
-      System.out.println("Unenrollment of " + camper.getFirstName() + " " + camper.getLastName() + " Successful!");
-    } catch (Exception e) {
-      System.out.println("That camper is not enrolled.");
-    }
+    manager.unenrollCamper(camper);
   }
 
   /**
    * Print out traverse of the campmanager
+   * 
    * @param manager - a CampManager to print traverse
-   * @param order - an order of the travese(PREORDER, INORDER, POSTORDER)
+   * @param order   - an order of the travese(PREORDER, INORDER, POSTORDER)
    */
   public static void Traverse(CampManager manager, String order) {
     Iterator<Camper> itr = manager.traverse(order);
