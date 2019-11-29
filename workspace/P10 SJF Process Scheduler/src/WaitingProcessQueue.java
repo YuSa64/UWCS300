@@ -22,11 +22,25 @@ public class WaitingProcessQueue implements WaitingQueueADT<CustomProcess> {
   public void insert(CustomProcess newObject) {
     // TODO Auto-generated method stub
     if (size + 1 < data.length) {
-      data[size++] = newObject;
-    }
-    else {
+      if (isEmpty()) {
+        data[0] = newObject;
+        size++;
+      }
+      else {
+        for (int i = 0; i < size; i++) {
+          if (newObject.compareTo(data[i]) < 0) {
+            for (int j = size; j > i; j--)
+              data[j] = data[j - 1];
+            data[i] = newObject;
+            size++;
+            return;
+          }
+        }
+        data[size++] = newObject;
+      }
+    } else {
       CustomProcess[] temp = new CustomProcess[data.length + INITIAL_CAPACITY];
-      for(int i = 0; i < size; i++)
+      for (int i = 0; i < size; i++)
         temp[i] = data[i];
       data = temp;
       insert(newObject);

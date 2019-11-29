@@ -26,14 +26,12 @@ public class ProcessSchedulerTester {
     WaitingProcessQueue tester = new WaitingProcessQueue();
     CustomProcess testData1 = new CustomProcess(10); // p1(10)
     CustomProcess testData2 = new CustomProcess(10); // p2(10)
-    CustomProcess testData3 = new CustomProcess(20); // p3(20)
+    CustomProcess testData3 = new CustomProcess(5); // p3(20)
     boolean isSame = false;
     tester.insert(testData1);
     tester.insert(testData2);
     tester.insert(testData3);
-    for (int i = 0; i < 20; i++)
-      tester.insert(new CustomProcess(i + 1)); // test making bigger array. Scucess(check debug)
-    isSame = tester.peekBest().compareTo(testData1) == 0;
+    isSame = tester.peekBest().compareTo(testData3) == 0;
     return isSame;
   }
 
