@@ -1,3 +1,15 @@
+//////////////////// ALL ASSIGNMENTS INCLUDE THIS SECTION /////////////////////
+//
+// Title: P10 SJF Process Scheduler
+// Files: CustomProcess.java, ProcessScheduler.java, ProcessSchedulerTester.java,
+//////////////////// WaitingProcessQueue.java
+// Course: CS300 Fall 2019
+//
+// Author: Hyeon Jun Jeong
+// Email: hjeong44@wisc.edu
+// Lecturer's Name: Mouna Ayari Ben Hadj Kacem
+//
+/////////////////////////////// 80 COLUMNS WIDE ///////////////////////////////
 import java.util.NoSuchElementException;
 
 public class WaitingProcessQueue implements WaitingQueueADT<CustomProcess> {
@@ -8,6 +20,15 @@ public class WaitingProcessQueue implements WaitingQueueADT<CustomProcess> {
                                 // WaitingProcessQueue. data is an oversize array
   private int size; // number of CustomProcesses stored in this WaitingProcessQueue
 
+  public static void main(String[] args) {
+    WaitingProcessQueue temp = new WaitingProcessQueue();
+    temp.insert(new CustomProcess(10));
+    temp.insert(new CustomProcess(2));
+    temp.insert(new CustomProcess(5));
+    temp.insert(new CustomProcess(3));
+    temp.insert(new CustomProcess(1));
+  }
+  
   public WaitingProcessQueue() {
     data = new CustomProcess[INITIAL_CAPACITY];
     size = 0;
@@ -24,20 +45,11 @@ public class WaitingProcessQueue implements WaitingQueueADT<CustomProcess> {
     if (size + 1 < data.length) {
       if (isEmpty()) {
         data[0] = newObject;
-        size++;
+      } else {
+        data[size] = newObject;
+        minHeapPercolateUp(size);
       }
-      else {
-        for (int i = 0; i < size; i++) {
-          if (newObject.compareTo(data[i]) < 0) {
-            for (int j = size; j > i; j--)
-              data[j] = data[j - 1];
-            data[i] = newObject;
-            size++;
-            return;
-          }
-        }
-        data[size++] = newObject;
-      }
+      size++;
     } else {
       CustomProcess[] temp = new CustomProcess[data.length + INITIAL_CAPACITY];
       for (int i = 0; i < size; i++)
@@ -60,9 +72,9 @@ public class WaitingProcessQueue implements WaitingQueueADT<CustomProcess> {
     if (isEmpty())
       throw new NoSuchElementException("This waiting queue is empty!");
     CustomProcess output = data[0];
-    for (int i = 0; i < size - 1; i++)
-      data[i] = data[i + 1];
-    data[size - 1] = null;
+    data[0] = data[size-1];
+    data[size-1] = null;
+    minHeapPercolateDown(0);
     size--;
     return output;
   }
@@ -102,6 +114,40 @@ public class WaitingProcessQueue implements WaitingQueueADT<CustomProcess> {
   public boolean isEmpty() {
     // TODO Auto-generated method stub
     return size == 0;
+  }
+  
+  /**
+   * Percolate up the data in given index
+   * @param index of the data to percolate up
+   */
+  private void minHeapPercolateUp(int index) {
+    int root = (index-1)/2;
+    if(data[index].compareTo(data[root]) < 0) {
+      CustomProcess temp = data[index];
+      data[index] = data[root];
+      data[root] = temp;
+      
+      minHeapPercolateUp(root);
+    }
+  }
+  
+  /**
+   * Percolate down the data in given index
+   * @param index of the data to percolate down
+   */
+  private void minHeapPercolateDown(int index) {
+    int root = index, r = 2*index + 2, l = 2*index + 1;
+    if(data[l] != null && l < size && data[l].compareTo(data[root]) < 0)
+      root = l;
+    if(data[r] != null && r < size && data[r].compareTo(data[root]) < 0)
+      root = r;
+    if(root != index) {
+      CustomProcess temp = data[index];
+      data[index] = data[root];
+      data[root] = temp;
+      
+      minHeapPercolateDown(root);
+    }
   }
 
 }
