@@ -12,6 +12,11 @@
 /////////////////////////////// 80 COLUMNS WIDE ///////////////////////////////
 import java.util.NoSuchElementException;
 
+/**
+ * Queue class of the CustomProcess instances
+ * 
+ * @author Hyeon Jun Jeong/hjeong44@wisc.edu
+ */
 public class WaitingProcessQueue implements WaitingQueueADT<CustomProcess> {
 
   private static final int INITIAL_CAPACITY = 20; // the initial capacity of this waiting process
@@ -20,15 +25,7 @@ public class WaitingProcessQueue implements WaitingQueueADT<CustomProcess> {
                                 // WaitingProcessQueue. data is an oversize array
   private int size; // number of CustomProcesses stored in this WaitingProcessQueue
 
-  public static void main(String[] args) {
-    WaitingProcessQueue temp = new WaitingProcessQueue();
-    temp.insert(new CustomProcess(10));
-    temp.insert(new CustomProcess(2));
-    temp.insert(new CustomProcess(5));
-    temp.insert(new CustomProcess(3));
-    temp.insert(new CustomProcess(1));
-  }
-  
+
   public WaitingProcessQueue() {
     data = new CustomProcess[INITIAL_CAPACITY];
     size = 0;
@@ -72,8 +69,8 @@ public class WaitingProcessQueue implements WaitingQueueADT<CustomProcess> {
     if (isEmpty())
       throw new NoSuchElementException("This waiting queue is empty!");
     CustomProcess output = data[0];
-    data[0] = data[size-1];
-    data[size-1] = null;
+    data[0] = data[size - 1];
+    data[size - 1] = null;
     minHeapPercolateDown(0);
     size--;
     return output;
@@ -115,37 +112,39 @@ public class WaitingProcessQueue implements WaitingQueueADT<CustomProcess> {
     // TODO Auto-generated method stub
     return size == 0;
   }
-  
+
   /**
    * Percolate up the data in given index
+   * 
    * @param index of the data to percolate up
    */
   private void minHeapPercolateUp(int index) {
-    int root = (index-1)/2;
-    if(data[index].compareTo(data[root]) < 0) {
+    int root = (index - 1) / 2;
+    if (data[index].compareTo(data[root]) < 0) {
       CustomProcess temp = data[index];
       data[index] = data[root];
       data[root] = temp;
-      
+
       minHeapPercolateUp(root);
     }
   }
-  
+
   /**
    * Percolate down the data in given index
+   * 
    * @param index of the data to percolate down
    */
   private void minHeapPercolateDown(int index) {
-    int root = index, r = 2*index + 2, l = 2*index + 1;
-    if(data[l] != null && l < size && data[l].compareTo(data[root]) < 0)
+    int root = index, r = 2 * index + 2, l = 2 * index + 1;
+    if (data[l] != null && l < size && data[l].compareTo(data[root]) < 0)
       root = l;
-    if(data[r] != null && r < size && data[r].compareTo(data[root]) < 0)
+    if (data[r] != null && r < size && data[r].compareTo(data[root]) < 0)
       root = r;
-    if(root != index) {
+    if (root != index) {
       CustomProcess temp = data[index];
       data[index] = data[root];
       data[root] = temp;
-      
+
       minHeapPercolateDown(root);
     }
   }

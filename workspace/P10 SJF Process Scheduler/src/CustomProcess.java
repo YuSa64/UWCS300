@@ -10,6 +10,12 @@
 // Lecturer's Name: Mouna Ayari Ben Hadj Kacem
 //
 /////////////////////////////// 80 COLUMNS WIDE ///////////////////////////////
+
+/**
+ * Data class that contains process id and burst time
+ * 
+ * @author Hyeon Jun Jeong/hjeong44@wisc.edu
+ */
 public class CustomProcess implements java.lang.Comparable<CustomProcess> {
 
   private static int nextProcessId = 1; // stores the id to be assigned to the next process to be

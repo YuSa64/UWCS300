@@ -10,6 +10,12 @@
 // Lecturer's Name: Mouna Ayari Ben Hadj Kacem
 //
 /////////////////////////////// 80 COLUMNS WIDE ///////////////////////////////
+
+/**
+ * Tester class that checks if CustomProcess and ProcessQueue classes works right
+ * 
+ * @author Hyeon Jun Jeong/hjeong44@wisc.edu
+ */
 public class ProcessSchedulerTester {
 
   public static void main(String[] args) {

@@ -1,5 +1,23 @@
+//////////////////// ALL ASSIGNMENTS INCLUDE THIS SECTION /////////////////////
+//
+// Title: P10 SJF Process Scheduler
+// Files: CustomProcess.java, ProcessScheduler.java, ProcessSchedulerTester.java,
+//////////////////// WaitingProcessQueue.java
+// Course: CS300 Fall 2019
+//
+// Author: Hyeon Jun Jeong
+// Email: hjeong44@wisc.edu
+// Lecturer's Name: Mouna Ayari Ben Hadj Kacem
+//
+/////////////////////////////// 80 COLUMNS WIDE ///////////////////////////////
+
 import java.util.Scanner;
 
+/**
+ * Driver class of WaitingProcessQueue instance that tracks number of processes and times
+ * 
+ * @author Hyeon Jun Jeong/hjeong44@wisc.edu
+ */
 public class ProcessScheduler {
 
   private int currentTime; // stores the current time after the last run
@@ -14,6 +32,7 @@ public class ProcessScheduler {
 
   /**
    * This method inserts the given process in the WaitingProcessQueue queue.
+   * 
    * @param process to inserts in queue
    */
   public void scheduleProcess(CustomProcess process) {
@@ -21,7 +40,8 @@ public class ProcessScheduler {
   }
 
   /**
-   *  runs the ready processes already scheduled in this processScheduler’s queue
+   * runs the ready processes already scheduled in this processScheduler’s queue
+   * 
    * @return String of whole process run
    */
   public String run() {
